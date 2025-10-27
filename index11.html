@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Aula 11 - Titan</title>
+    <meta charset="ufht-8"> 
+
+</head>
+<body>  
+    <h1> Bem vindo a aula 11 - ESCOPO DE VARIÁVEIS </h1>
+<script>
+    function sum(x,y){
+        //variavel local, apenas reconhecida no bloco da função.
+        result=x+y
+        return result
+
+    }
+
+    for(i = 0; i<5; i++){
+        outra = 2
+        let essa = 1
+        console.log(i*essa+outra)
+
+    }
+    //dentro de loops, ifs etc.. variavel é global
+    //se declarada com "let" se torna local
+    console.log(outra)
+    console.log(essa)
+    
+</script>
+
+</body>
+
+
+</html>
