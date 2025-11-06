@@ -43,7 +43,7 @@
                 <label for="CSS">CSS</label>
 
                 <input type="radio" id="JS" name="tecs">
-                <label for="JS">JS</labem>
+                <label for="JS">JS</label>
             </div>
 
             <label for="parcelas"></label>
@@ -58,11 +58,25 @@
             <label for="mensagem">Mensagem</label>
             <textarea name="mensagem" id="mensagem" rows="5"></textarea>
         </form>
-
+        <span class="texto"></span>
 
     </body>
     <script>
+        // Document.querySelector é um método que retorna o primeiro elemento 
+        // dentro do documento que corresponde ao seletor especificado ou grupo de seletores.
+        const contato = document.querySelector('#contato');
+        const texto = document.querySelector('.texto');
         console.log(document.forms[0].elements)
+        
+        function handleKeyUp(event) {
+            //event.target -> elemento que disparou o evento
+            console.log(event.target.value);
+            texto.innerText = event.target.value;
+        }
+        
+        contato.addEventListener('keyup', handleKeyUp);
+
+
     </script>
 
 </html>
