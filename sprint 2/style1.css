@@ -1,0 +1,47 @@
+body {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+
+}
+
+
+label {
+
+    margin-top: 30px;
+    display:block;
+    margin-bottom: 10px;
+}
+
+input {
+
+    font-size: 1.2rem;
+    padding:10px;
+
+}
+
+button { 
+
+    margin-top: 30px;
+    display: block;
+
+}
+
+.checkbox, .radio {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox, .radio label{
+    margin: 0px;
+    display: inline;
+}
+
+.checkbox, .radio input { 
+    margin: 0px;
+    width: 20px;
+    height: 20px;
+}

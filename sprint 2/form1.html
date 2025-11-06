@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>sprint 2 - Formulário TITAN</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style1.css">
+    </head>
+    <body>
+        <form action="./" id="contato" nome="contato">
+
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nomes" required>
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senhas">
+
+            <label for="lembrar">Lembrar senha</label>
+            <input type="checkbox" id="lembrar" name="lembrar">>
+
+            <label for="Email">Email</label>
+            <input type="email" id="email" name="senhas" required>
+
+            <label for="Idade">Idade</label>
+            <input type="number" id="idade" name="idade">            
+
+            <label for="nasc">bDay</label>
+            <input type="date" id="nasc" name="nasc" placeholder="dd/mm/aaaa"> 
+
+            <button type="submit">Enviar</button>
+
+            <div class="checkbox" >
+                <label for="aceito">Aceita os termos de condições de serviços?</label>
+                <input type="checkbox" id="aceito" name="aceitotermos" value="aceito">
+            </div>
+            
+            <p>Escolha uma Tecnologia</p>
+
+            <div class="radio">
+                <input type="radio" id="html" name="tecs" checked>
+                <label for="html">HTML</label>
+
+                <input type="radio" id="CSS" name="tecs">
+                <label for="CSS">CSS</label>
+
+                <input type="radio" id="JS" name="tecs">
+                <label for="JS">JS</labem>
+            </div>
+
+            <label for="parcelas"></label>
+            <select id="parcelas" name="parcelas">
+
+                <option value="1x">1x</option>
+                <option value="2x">2x</option>
+                <option value="3x">3x</option>
+
+            </select>
+
+            <label for="mensagem">Mensagem</label>
+            <textarea name="mensagem" id="mensagem" rows="5"></textarea>
+        </form>
+
+
+    </body>
+    <script>
+        console.log(document.forms[0].elements)
+    </script>
+
+</html>
