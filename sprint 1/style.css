@@ -25,7 +25,7 @@ body *{
 #container {
     width: 360px;
     margin: 56px auto 0px;
-
+    text-align: center;
 }
 
 #profile {
@@ -36,13 +36,92 @@ body *{
 
 #profile p {
     text-align: center;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 24px;
     margin-top: 8px;
 }
 
 #profile img { 
     width: 112px;
+
+
+}
+
+/* links */
+ul{ 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+
+    padding: 24px 0;
+
+
+}
+
+ul li a{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 16px 24px;
+
+    background: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.5s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+ul li a:hover{
+
+    background: rgba(255, 255, 255, 0.2);
+    border: 1.5px solid white;
+
+}
+
+#TITAN:hover{
+
+    color: rgb(242, 169, 0);
+    border: 1px solid orange;
+
+}
+
+
+/* Social links */
+
+#social {
+
+    display: flex;
+    justify-content: center;
+
+    padding: 24px 0;
+    font-size: 24px;
+
+
+}
+
+#social a {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+
+}
+
+#social a:hover {
+    background: rgb(255, 255, 255, 0.2) ;
+    padding: 16px;
+
 
 
 }
