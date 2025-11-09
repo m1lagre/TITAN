@@ -6,18 +6,36 @@
 
 }
 
+:root { 
+    --textcolor: white;
+    --bgurl: url(./ASSETS/bg-mobile.jpg);
+    --stroke-color: rgba(255, 255, 255, 0.5);
+    --surface-color: rgba(255, 255, 255, 0.05);
+    --surface-color-hover: rgba(0, 0, 0, 0.02);
+    --highlight-color: rgb(255, 255, 255, 0.2);
+}
+
+.light { 
+    --textcolor: black;
+    --bgurl: url(./ASSETS/back.jpg);
+    --stroke-color: rgba(0, 0, 0, 0.5);
+    --surface-color: rgba(0, 0, 0, 0.05);
+    --surface-color-hover: rgba(0, 0, 0, 0.02);
+    --highlight-color: rgba(0, 0, 0, 0.1);
+}
+
 
 body{
 
 
-    background: url(./ASSETS/bg-mobile.jpg) no-repeat top center/cover
+    background: var(--bgurl) no-repeat top center/cover
     
 }
 
 body *{
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
-  color: white;
+  color: var(--textcolor);
 }
 
 
@@ -32,18 +50,23 @@ body *{
     text-align: center;
     padding: 24px;
 
+
 }
+
 
 #profile p {
     text-align: center;
     font-weight: 400;
     line-height: 24px;
     margin-top: 8px;
+    
 }
 
 #profile img { 
-    width: 112px;
-
+  width: 112px;
+  border-radius: 50%;
+  border: 2px solid var(--textcolor);
+  box-shadow: 0 0 10px var(--textcolor); 
 
 }
 
@@ -66,9 +89,9 @@ ul li a{
     justify-content: center;
     padding: 16px 24px;
 
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--surface-color);
     transition: background-color 0.5s;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--stroke-color);
     border-radius: 8px;
     
     backdrop-filter: blur(4px);
@@ -81,8 +104,8 @@ ul li a{
 
 ul li a:hover{
 
-    background: rgba(255, 255, 255, 0.2);
-    border: 1.5px solid white;
+    background: var(--surface-color-hover);
+    border: 1.5px solid var(--textcolor);
 
 }
 
@@ -129,4 +152,30 @@ ul li a:hover{
 footer { 
     padding: 24px 0px;
     font-size: 14px;
+}
+
+.typing {
+  display: flex;
+  font-family: "Inter", sans-serif;
+  color: var(--textcolor);
+  text-align: center;
+  font-weight: 500;
+  line-height: 24px;
+  margin-top: 8px;
+  overflow: hidden; 
+  border-right: 2px solid var(--textcolor); /* o cursor piscando */
+  width: 0; /* começa com largura 0 */
+  margin: 0 auto;
+  animation: typing 4s steps(20, end) infinite alternate, blink 0.6s step-end infinite;
+}
+
+/* efeito de digitar */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 15ch; } /* 15 caracteres visíveis (ajuste conforme o texto) */
+}
+
+/* efeito de piscar o cursor */
+@keyframes blink {
+  50% { border-color: transparent; }
 }
