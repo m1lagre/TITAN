@@ -13,6 +13,7 @@
     --surface-color: rgba(255, 255, 255, 0.05);
     --surface-color-hover: rgba(0, 0, 0, 0.02);
     --highlight-color: rgb(255, 255, 255, 0.2);
+    --switch-bg-url: url(./ASSETS/moon-stars.svg)
 }
 
 .light { 
@@ -22,12 +23,11 @@
     --surface-color: rgba(0, 0, 0, 0.05);
     --surface-color-hover: rgba(0, 0, 0, 0.02);
     --highlight-color: rgba(0, 0, 0, 0.1);
+    --switch-bg-url: url(./ASSETS/sun.svg)
 }
 
 
 body{
-
-
     background: var(--bgurl) no-repeat top center/cover
     
 }
@@ -44,8 +44,11 @@ body *{
     width: 360px;
     margin: 56px auto 0px;
     text-align: center;
+    justify-content: center;
+
 }
 
+/* Profile */
 #profile {
     text-align: center;
     padding: 24px;
@@ -69,6 +72,51 @@ body *{
   box-shadow: 0 0 10px var(--textcolor); 
 
 }
+/* Switch */
+
+#switch {
+    border: 1px solid red;
+    position: relative;
+    width: 64px;
+    margin: 4px auto;
+}
+
+#switch button { 
+    background: white var(--switch-bg-url) no-repeat center;
+    width: 32px;
+    height: 32px;
+    border: 0px;
+    border-radius: 50%;
+
+    position: absolute;
+
+    transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+    z-index: 1;
+
+}
+
+#switch span {
+    display: block;
+    width: 64px;
+    height: 24px;
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+    
+
+}
+
+.light #switch button {
+
+    right:0;
+    left: initial;
+
+}
+
 
 /* links */
 ul{ 
@@ -152,6 +200,7 @@ ul li a:hover{
 footer { 
     padding: 24px 0px;
     font-size: 14px;
+    text-align: center;
 }
 
 .typing {
