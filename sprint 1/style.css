@@ -75,7 +75,6 @@ body *{
 /* Switch */
 
 #switch {
-    border: 1px solid red;
     position: relative;
     width: 64px;
     margin: 4px auto;
