@@ -7,6 +7,3 @@ function TITAN(x,y){
     return console.log('Resultado da divisão é: ',valorx/valory), console.log('Resto é: ', valorx%valory)   
 
 }
-
-
-TITAN(x,y);
