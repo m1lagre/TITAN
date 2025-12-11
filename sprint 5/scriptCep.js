@@ -14,5 +14,6 @@ function buscaCep(cep) {
     .then(response => response.text())
     .then(body => {
         console.log(body);
+        resultadoCep.innerText = body;
     })
 }
