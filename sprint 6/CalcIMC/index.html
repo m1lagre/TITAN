@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Calculadora de IMC</title>
-    <script src="script.js"></script>
 </head>
 <body>
     <main id="container">
@@ -24,7 +23,7 @@
                         Peso em kg
                     </label>
                     <div class="input-field">
-                        <input type="number" id="wheight" required></input>
+                        <input type="number" id="weight" step="0.01" required></input>
                         <i class="fa-solid fa-weight-hanging"></i>
                         <span>
                             kg
@@ -35,7 +34,7 @@
                         Altura em m
                     </label>                    
                     <div class="input-field">
-                        <input type="number" id="wheight" required></input>
+                        <input type="number" id="height" step="0.01" required></input>
                         <i class="fa-solid fa-ruler"></i>
                         <span>
                             m
@@ -66,5 +65,6 @@
             </div>
         </section>
     </main>
+<script src="script.js"></script>
 </body>
 </html>
