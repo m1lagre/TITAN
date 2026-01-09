@@ -67,6 +67,7 @@ export function Header() {
                 flex-1
                 h-full 
                 bg-transparent 
+                outline-none
                 border-none 
                 text-[#9B9B9B]
                 placeholder:text-slate-400 
