@@ -32,10 +32,7 @@ export function Header() {
           className="absolute top-[8px] h-[498px] w-[420px] left-[1134px] object-contain z-0"
         />
 
-        {/* DIV DE CONTEÚDO (O FILHO) - CORREÇÕES AQUI
-            1. Adicionei 'flex flex-col': Agora o 'gap-[95px]' vai funcionar e empurrar a barra para baixo.
-            2. z-10: Garante que fique acima de qualquer imagem de fundo.
-        */}
+        {/* DIV FILHO*/}
         <div className="absolute w-[1590px] h-[387px] top-[118px] left-[85px] flex flex-col gap-[95px] z-10">
           {/* ITEM 1: LOGO */}
           <div className="flex justify-start">
@@ -46,10 +43,7 @@ export function Header() {
             />
           </div>
 
-          {/* ITEM 2: BARRA DE PESQUISA - CORREÇÕES VISUAIS
-             1. bg-white: Fundo branco explícito.
-             2. border-slate-200: Define uma cor cinza suave para a borda (tira o preto).
-          */}
+          {/* ITEM 2: BARRA DE PESQUISA - CORREÇÕES VISUAIS */}
           <div
             className="
             flex-1 

@@ -17,3 +17,6 @@ export const typeColors: Record<string, string> = {
   flying: "#955CB9cc",
   dragon: "#5B0FBFcc",
 };
+
+// Função auxiliar para evitar erro se o tipo não existir
+export const getTypeColor = (type: string) => typeColors[type] || "#666666";
