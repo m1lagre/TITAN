@@ -31,8 +31,8 @@ export function Home() {
     const searchLower = search.toLowerCase();
     // Verifica se o nome contem o texto OU se o ID contem o numero
     return (
-      pokemon.name.toLowerCase().includes(searchLower) ||
-      pokemon.id.toString().includes(searchLower)
+      pokemon.name.toLowerCase().includes(searchLower) || // Verifica nome
+      pokemon.id.toString().includes(searchLower) // Também verifica o ID como string
     );
   });
 
