@@ -9,7 +9,14 @@ const colors = {
   dexBlue: "#3D7DCA",
 };
 
-export function Header() {
+// 1. Definimos o que o Header espera receber
+interface HeaderProps {
+  search: string;
+  setSearch: (value: string) => void;
+}
+
+// 2. Recebemos as props aqui
+export function Header({ search, setSearch }: HeaderProps) {
   return (
     <div className="w-full flex justify-center mt-6 px-4 overflow-x-hidden">
       {/* HEADER PAI (1760px) */}
@@ -63,6 +70,8 @@ export function Header() {
             <input
               type="text"
               placeholder="Pesquise seu Pokémon aqui..."
+              value={search} // O valor vem do pai
+              onChange={(e) => setSearch(e.target.value)} // Avisa o pai quando digita
               className="
                 flex-1
                 h-full 

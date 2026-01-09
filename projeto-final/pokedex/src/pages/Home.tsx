@@ -5,10 +5,12 @@ import { PokemonCard } from "../components/PokemonCard";
 import { Header } from "../components/Header";
 
 const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee993] to-[#d6e8fe]";
-
 export function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // 1. Novo estado para a busca
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     async function loadData() {
@@ -24,10 +26,20 @@ export function Home() {
     loadData();
   }, []);
 
-  // --- CORREÇÃO: DIVIDIR EM GRUPOS DE 3 ---
+  // 2. Lógica de Filtro (Nome ou ID)
+  const filteredPokemons = pokemons.filter((pokemon) => {
+    const searchLower = search.toLowerCase();
+    // Verifica se o nome contem o texto OU se o ID contem o numero
+    return (
+      pokemon.name.toLowerCase().includes(searchLower) ||
+      pokemon.id.toString().includes(searchLower)
+    );
+  });
+
+  // 3. Usamos 'filteredPokemons' aqui em vez de 'pokemons'
   const chunkedPokemons = [];
-  for (let i = 0; i < pokemons.length; i += 3) {
-    chunkedPokemons.push(pokemons.slice(i, i + 3));
+  for (let i = 0; i < filteredPokemons.length; i += 3) {
+    chunkedPokemons.push(filteredPokemons.slice(i, i + 3));
   }
 
   if (loading)
@@ -45,30 +57,28 @@ export function Home() {
     <div
       className={`min-h-screen w-full font-sans pb-32 flex flex-col items-center overflow-x-hidden ${BACKGROUND_COLOR}`}
     >
-      <Header />
+      {/* 4. Passamos o estado e a função para o Header */}
+      <Header search={search} setSearch={setSearch} />
 
-      {/* CONTAINER PRINCIPAL */}
       <main className="flex flex-col items-center w-full mt-16 gap-8">
-        {/* Mapeando as linhas (Cada 'row' tem 3 pokemons) */}
+        {/* Tratamento para busca sem resultados */}
+        {filteredPokemons.length === 0 && (
+          <div className="text-xl text-slate-500 font-bold mt-10">
+            Nenhum Pokémon encontrado.
+          </div>
+        )}
+
         {chunkedPokemons.map((row, index) => (
           <div
             key={index}
-            className="
-              /* LAYOUT DA FILEIRA (Conforme seu print do Figma) */
-              w-[1760px]         /* Width Fixed */
-              h-[530px]          /* Height Hug/Fixed */
-              
-              flex               /* Layout Horizontal */
-              flex-row 
-              gap-[20px]         /* Gap exato do Figma */
-              
-              items-center       /* Centraliza verticalmente */
-              justify-center     /* Centraliza o grupo de 3 no meio dos 1760px */
-            "
+            className="w-[1760px] h-[530px] flex flex-row gap-[20px] items-center justify-center"
           >
             {row.map((pokemon) => (
               <PokemonCard key={pokemon.id} pokemon={pokemon} />
             ))}
+            {/* Dica: Se a última linha tiver menos de 3 itens, o justify-center vai centralizá-los. 
+               Se quiser que fiquem alinhados à esquerda, mude justify-center para justify-start na última linha.
+            */}
           </div>
         ))}
       </main>
