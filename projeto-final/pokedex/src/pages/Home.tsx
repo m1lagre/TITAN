@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getPokemons } from "../services/pokeApi";
 import type { Pokemon } from "../types/pokemon";
-import { PokemonCard } from "../components/PokemonCard";
 import { Header } from "../components/Header";
+import { PokemonList } from "../components/PokemonList";
 
 const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee993] to-[#d6e8fe]";
 export function Home() {
@@ -36,12 +36,6 @@ export function Home() {
     );
   });
 
-  // 3. Usamos 'filteredPokemons' aqui em vez de 'pokemons'
-  const chunkedPokemons = [];
-  for (let i = 0; i < filteredPokemons.length; i += 3) {
-    chunkedPokemons.push(filteredPokemons.slice(i, i + 3));
-  }
-
   if (loading)
     return (
       <div
@@ -54,33 +48,16 @@ export function Home() {
     );
 
   return (
-    <div
-      className={`min-h-screen w-full font-sans pb-32 flex flex-col items-center overflow-x-hidden ${BACKGROUND_COLOR}`}
-    >
-      {/* 4. Passamos o estado e a função para o Header */}
+    <div className={`min-h-screen w-full ... ${BACKGROUND_COLOR}`}>
+      {/* Cabeçalho com Busca */}
       <Header search={search} setSearch={setSearch} />
 
-      <main className="flex flex-col items-center w-full mt-16 gap-8">
-        {/* Tratamento para busca sem resultados */}
-        {filteredPokemons.length === 0 && (
-          <div className="text-xl text-slate-500 font-bold mt-10">
-            Nenhum Pokémon encontrado.
-          </div>
-        )}
-
-        {chunkedPokemons.map((row, index) => (
-          <div
-            key={index}
-            className="w-[1760px] h-[530px] flex flex-row gap-[20px] items-center justify-center"
-          >
-            {row.map((pokemon) => (
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
-            ))}
-            {/* Dica: Se a última linha tiver menos de 3 itens, o justify-center vai centralizá-los. 
-               Se quiser que fiquem alinhados à esquerda, mude justify-center para justify-start na última linha.
-            */}
-          </div>
-        ))}
+      <main className="flex flex-col items-center w-full mt-16 pb-16">
+        {/* AQUI ESTÁ A MUDANÇA:
+            A Home não sabe como o grid é desenhado. 
+            Ela só diz: "PokemonList, toma aqui os dados filtrados e se vira".
+        */}
+        <PokemonList pokemons={filteredPokemons} />
       </main>
     </div>
   );

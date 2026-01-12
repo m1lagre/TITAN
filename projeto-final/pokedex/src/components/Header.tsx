@@ -28,10 +28,6 @@ export function Header({ search, setSearch }: HeaderProps) {
             />
           </div>
 
-          {/* AQUI ESTÁ A MÁGICA:
-             Substituímos aquele monte de <div> e <input> por uma linha simples.
-             Repassamos as props que vieram da Home para o SearchBar.
-          */}
           <SearchBar search={search} setSearch={setSearch} />
         </div>
       </header>

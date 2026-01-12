@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { Pokemon } from "../types/pokemon";
+import type { PokemonDetails } from "../types/pokemon";
 
 // Cria uma conexão padrão com o site da API
 const api = axios.create({
@@ -28,6 +29,19 @@ export async function getPokemons(): Promise<Pokemon[]> {
   const detailedPokemons = await Promise.all(promises);
 
   return detailedPokemons;
+}
+
+export async function getPokemonById(
+  id: string | number
+): Promise<PokemonDetails> {
+  // 1. O Axios faz o get direto na URL
+  const response = await axios.get<PokemonDetails>(
+    `https://pokeapi.co/api/v2/pokemon/${id}`
+  );
+
+  // 2. Com Axios, a resposta já vem pronta dentro de .data
+  // Não precisa fazer aquele passo extra de .json()
+  return response.data;
 }
 
 export default api;
