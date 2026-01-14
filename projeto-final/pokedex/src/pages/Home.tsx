@@ -5,11 +5,10 @@ import { Header } from "../components/Header";
 import { PokemonList } from "../components/PokemonList";
 
 const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee993] to-[#d6e8fe]";
+
 export function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // 1. Novo estado para a busca
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -26,13 +25,11 @@ export function Home() {
     loadData();
   }, []);
 
-  // 2. Lógica de Filtro (Nome ou ID)
   const filteredPokemons = pokemons.filter((pokemon) => {
     const searchLower = search.toLowerCase();
-    // Verifica se o nome contem o texto OU se o ID contem o numero
     return (
-      pokemon.name.toLowerCase().includes(searchLower) || // Verifica nome
-      pokemon.id.toString().includes(searchLower) // Também verifica o ID como string
+      pokemon.name.toLowerCase().includes(searchLower) ||
+      pokemon.id.toString().includes(searchLower)
     );
   });
 
@@ -48,17 +45,55 @@ export function Home() {
     );
 
   return (
-    <div className={`min-h-screen w-full ... ${BACKGROUND_COLOR}`}>
-      {/* Cabeçalho com Busca */}
-      <Header search={search} setSearch={setSearch} />
+    // 1. FUNDO GERAL (A cor de fundo ocupa a tela toda)
+    <div
+      className={`min-h-screen w-full flex justify-center ${BACKGROUND_COLOR}`}
+    >
+      {/* 2. DIV PAI (O Layout que você me passou) */}
+      <div
+        className="
+          flex flex-col items-center
+          relative
 
-      <main className="flex flex-col items-center w-full mt-16 pb-16">
-        {/* AQUI ESTÁ A MUDANÇA:
-            A Home não sabe como o grid é desenhado. 
-            Ela só diz: "PokemonList, toma aqui os dados filtrados e se vira".
-        */}
-        <PokemonList pokemons={filteredPokemons} />
-      </main>
+          /* --- MOBILE  --- */
+          w-full max-w-[423px]  
+          min-h-[871px]        
+          mt-[64px]           
+          px-[16px]       
+          gap-[40px]         
+
+          /* --- DESKTOP  --- */
+          lg:max-w-[1920px] 
+          lg:min-h-[2487px] 
+          lg:mt-0 
+          lg:px-0 
+          lg:gap-0
+          
+        "
+      >
+        {/* Cabeçalho */}
+        <Header search={search} setSearch={setSearch} />
+
+        {/* Main Content (Lista de Pokemons) */}
+        <main
+          className="
+            flex flex-col items-center w-full 
+            
+            /* MOBILE:
+               Removemos 'mt' e 'pb' aqui, pois o GAP do pai (40px) 
+               já empurra a lista para baixo do header.
+            */
+            pb-8 
+
+            /* DESKTOP:
+               Mantemos as margens originais do desktop.
+            */
+            lg:mt-16 lg:pb-16
+          "
+        >
+          <PokemonList pokemons={filteredPokemons} />
+        </main>
+      </div>
     </div>
   );
 }

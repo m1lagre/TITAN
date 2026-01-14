@@ -1,56 +1,43 @@
 import type { PokemonDetails } from "../types/pokemon";
 
 interface PokemonStatsProps {
-  stats: PokemonDetails["stats"]; // Pegando a tipagem direto da interface
+  stats: PokemonDetails["stats"];
 }
 
 const statNames: Record<string, string> = {
   hp: "HP",
-  attack: "Ataque",
-  defense: "Defesa",
-  "special-attack": "Ataque Especial",
-  "special-defense": "Defesa Especial",
-  speed: "Velocidade",
+  attack: "Atk", // Abreviei para mobile
+  defense: "Def",
+  "special-attack": "Sp.Atk",
+  "special-defense": "Sp.Def",
+  speed: "Vel",
 };
 
 export function PokemonStats({ stats }: PokemonStatsProps) {
-  // Calcula o total
   const total = stats.reduce((acc, curr) => acc + curr.base_stat, 0);
 
   return (
     <div
-      style={{
-        width: "1190px",
-        height: "817px",
-        padding: "0 48px 48px 48px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        marginTop: "48px",
-        boxSizing: "border-box",
-      }}
+      className="
+      flex flex-col justify-between box-border
+      /* MOBILE */
+      w-full mt-[24px] px-[24px] pb-[24px] gap-[24px]
+      /* DESKTOP */
+      lg:w-[1190px] lg:h-[817px] lg:mt-[48px] lg:px-[48px] lg:pb-[48px] lg:gap-0
+    "
     >
-      <div
-        style={{
-          width: "100%",
-          height: "635px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "32px",
-        }}
-      >
+      {/* Lista de Stats */}
+      <div className="flex flex-col w-full gap-[16px] lg:gap-[32px]">
         <div
-          style={{
-            width: "100%",
-            height: "53px",
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 600,
-            fontSize: "32px",
-            display: "flex",
-            alignItems: "flex-end",
-          }}
+          className="
+          font-['Inter'] font-semibold flex items-end
+          /* MOBILE */
+          text-[24px] h-[30px]
+          /* DESKTOP */
+          lg:text-[32px] lg:h-[53px]
+        "
         >
-          Estatísticas de Batalha
+          Estatísticas
         </div>
 
         {stats.map((stat) => {
@@ -62,39 +49,26 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
           return (
             <div
               key={stat.stat.name}
-              style={{
-                width: "100%",
-                height: "65px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
+              className="
+                flex flex-col justify-between w-full
+                /* MOBILE */
+                h-[50px]
+                /* DESKTOP */
+                lg:h-[65px]
+              "
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "29px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <span className="text-xl font-bold text-slate-500 capitalize">
+              <div className="flex justify-between items-center w-full h-[29px]">
+                <span className="text-sm lg:text-xl font-bold text-slate-500 capitalize">
                   {statNames[stat.stat.name] || stat.stat.name}
                 </span>
-                <span className="text-2xl font-bold text-slate-800">
+                <span className="text-lg lg:text-2xl font-bold text-slate-800">
                   {stat.base_stat}
                 </span>
               </div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "20px",
-                  backgroundColor: "#E2E8F0",
-                  borderRadius: "999px",
-                  overflow: "hidden",
-                }}
-              >
+
+              {/* Barra Cinza (Fundo) */}
+              <div className="w-full h-[12px] lg:h-[20px] bg-[#E2E8F0] rounded-full overflow-hidden">
+                {/* Barra Colorida (Valor) */}
                 <div
                   className={`h-full ${barColor}`}
                   style={{ width: `${Math.min(stat.base_stat, 100)}%` }}
@@ -105,22 +79,18 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
         })}
       </div>
 
+      {/* Caixa de TOTAL */}
       <div
-        style={{
-          width: "100%",
-          height: "86px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderRadius: "16px",
-          padding: "24px",
-          backgroundColor: "#6493EB",
-          color: "white",
-          boxSizing: "border-box",
-        }}
+        className="
+        flex justify-between items-center rounded-[16px] bg-[#6493EB] text-white box-border
+        /* MOBILE */
+        w-full h-[60px] p-[16px]
+        /* DESKTOP */
+        lg:h-[86px] lg:p-[24px]
+      "
       >
-        <span className="text-2xl font-bold">Total</span>
-        <span className="text-4xl font-bold">{total}</span>
+        <span className="text-xl lg:text-2xl font-bold">Total</span>
+        <span className="text-2xl lg:text-4xl font-bold">{total}</span>
       </div>
     </div>
   );

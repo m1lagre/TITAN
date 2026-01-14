@@ -1,54 +1,34 @@
 import type { PokemonDetails } from "../types/pokemon";
+import { typeColors } from "../utils/typeColors";
+
 interface PokemonHeaderProps {
   pokemon: PokemonDetails;
   color: string;
 }
 
 export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
-  // Cores fixas para as pílulas de tipo (copiado do seu código anterior)
-  const typeColors: Record<string, string> = {
-    fire: "#F57D31",
-    grass: "#74CB48",
-    water: "#6493EB",
-    bug: "#A7B723",
-    normal: "#AAA67F",
-    poison: "#A43E9E",
-    electric: "#F9CF30",
-    ground: "#DEC16B",
-    fairy: "#E69EAC",
-    fighting: "#C12239",
-    psychic: "#FB5584",
-    rock: "#B69E31",
-    ghost: "#70559B",
-    ice: "#9AD6DF",
-    dragon: "#7037FF",
-  };
-
   return (
     <div
-      style={{
-        width: "1190px",
-        height: "528px",
-        backgroundColor: color,
-        backdropFilter: "blur(500px)",
-      }}
-      className="relative flex-shrink-0"
+      style={{ backgroundColor: color }}
+      className="
+          relative flex-shrink-0 backdrop-blur-md
+          /* MOBILE */
+          w-full h-[236px]
+          /* DESKTOP */
+          lg:w-[1190px] lg:h-[528px]
+        "
     >
       {/* Linha 1: ID e Tipos */}
       <div
-        style={{
-          width: "100%",
-          height: "108px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          paddingTop: "48px",
-          paddingRight: "48px",
-          paddingLeft: "48px",
-          boxSizing: "border-box",
-        }}
+        className="
+        w-full flex justify-between items-start box-border
+        /* MOBILE */
+        h-[60px] pt-[24px] px-[24px]
+        /* DESKTOP */
+        lg:h-[108px] lg:pt-[48px] lg:px-[48px]
+      "
       >
-        <span className="text-3xl font-bold text-white/60">
+        <span className="font-bold text-white/60 text-xl lg:text-3xl">
           #{String(pokemon.id).padStart(3, "0")}
         </span>
 
@@ -60,7 +40,13 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
                 backgroundColor: typeColors[t.type.name],
                 color: "#FFFFFF",
               }}
-              className="h-[34px] px-[16px] rounded-full flex items-center justify-center text-sm capitalize font-bold shadow-sm"
+              className="
+                flex items-center justify-center rounded-full capitalize font-bold shadow-sm
+                /* MOBILE */
+                h-[24px] px-[12px] text-xs
+                /* DESKTOP */
+                lg:h-[34px] lg:px-[16px] lg:text-sm
+              "
             >
               {t.type.name}
             </span>
@@ -70,22 +56,20 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
 
       {/* Linha 2: Nome */}
       <div
-        style={{
-          width: "100%",
-          height: "58px",
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          paddingLeft: "48px",
-          marginTop: "8px",
-          boxSizing: "border-box",
-        }}
+        className="
+        w-full flex items-center box-border
+        /* MOBILE */
+        h-[40px] px-[24px] mt-[4px] gap-[8px]
+        /* DESKTOP */
+        lg:h-[58px] lg:pl-[48px] lg:mt-[8px] lg:gap-[10px]
+      "
       >
         <h1
-          className="font-bold capitalize truncate"
-          style={{ fontSize: "56px", lineHeight: "100%", color: "#5D5D5D" }}
+          className="font-bold capitalize truncate text-[#5D5D5D]"
+          style={{ lineHeight: "100%" }}
         >
-          {pokemon.name}
+          {/* Tamanho da fonte responsivo via Tailwind classes arbitrárias ou style inline condicional */}
+          <span className="text-[32px] lg:text-[56px]">{pokemon.name}</span>
         </h1>
       </div>
 
@@ -93,8 +77,18 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
       <img
         src={pokemon.sprites.other["official-artwork"].front_default}
         alt={pokemon.name}
-        className="absolute z-10 drop-shadow-2xl"
-        style={{ width: "475px", height: "388px", top: "108px", left: "357px" }}
+        className="
+          absolute z-10 drop-shadow-2xl object-contain
+          
+          /* MOBILE: Centralizada e menor */
+          w-[180px] h-[180px]
+          bottom-[-20px] left-1/2 -translate-x-1/2
+          
+          /* DESKTOP: Gigante e na direita */
+          lg:w-[475px] lg:h-[388px] 
+          lg:top-[108px] lg:left-[357px] 
+          lg:bottom-auto lg:translate-x-0
+        "
       />
     </div>
   );
