@@ -7,11 +7,7 @@ interface PokemonListProps {
 
 export function PokemonList({ pokemons }: PokemonListProps) {
   if (pokemons.length === 0) {
-    return (
-      <div className="text-xl text-slate-500 font-bold mt-10">
-        Nenhum Pokémon encontrado.
-      </div>
-    );
+    return null;
   }
 
   return (

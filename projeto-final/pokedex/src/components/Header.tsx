@@ -1,5 +1,4 @@
 import logoImg from "../assets/Pokedex1.png";
-import fraseImg from "../assets/frase.png";
 import heroImg from "../assets/ash.png";
 import { SearchBar } from "./SearchBar";
 

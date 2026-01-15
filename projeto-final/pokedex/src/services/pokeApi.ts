@@ -11,7 +11,7 @@ const api = axios.create({
 // O "async" diz que essa função demora um pouco (busca na internet)
 export async function getPokemons(): Promise<Pokemon[]> {
   // 1. Pega a lista simples (só nome e link) dos 20 primeiros
-  const response = await api.get("/pokemon?limit=20");
+  const response = await api.get("/pokemon?limit=500");
 
   // 2. Aqui está o truque!
   // A lista inicial não tem a foto nem o tipo.

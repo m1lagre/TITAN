@@ -6,11 +6,11 @@ interface PokemonStatsProps {
 
 const statNames: Record<string, string> = {
   hp: "HP",
-  attack: "Atk", // Abreviei para mobile
-  defense: "Def",
-  "special-attack": "Sp.Atk",
-  "special-defense": "Sp.Def",
-  speed: "Vel",
+  attack: "Ataque", // Abreviei para mobile
+  defense: "Defesa",
+  "special-attack": "Ataque Especial",
+  "special-defense": "Defesa Especial",
+  speed: "Velocidade",
 };
 
 export function PokemonStats({ stats }: PokemonStatsProps) {
@@ -30,14 +30,14 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
       <div className="flex flex-col w-full gap-[16px] lg:gap-[32px]">
         <div
           className="
-          font-['Inter'] font-semibold flex items-end
+          font-['Inter'] font-semibold flex items-end text-[#5D5D5D]
           /* MOBILE */
           text-[24px] h-[30px]
           /* DESKTOP */
           lg:text-[32px] lg:h-[53px]
         "
         >
-          Estatísticas
+          Estatísticas de Batalha
         </div>
 
         {stats.map((stat) => {
@@ -82,7 +82,7 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
       {/* Caixa de TOTAL */}
       <div
         className="
-        flex justify-between items-center rounded-[16px] bg-[#6493EB] text-white box-border
+        flex justify-between items-center rounded-[16px] bg-[#E8E8E8] text-[#5D5D5D]
         /* MOBILE */
         w-full h-[60px] p-[16px]
         /* DESKTOP */
@@ -90,7 +90,9 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
       "
       >
         <span className="text-xl lg:text-2xl font-bold">Total</span>
-        <span className="text-2xl lg:text-4xl font-bold">{total}</span>
+        <span className="text-2xl lg:text-4xl font-bold text-[#373737]">
+          {total}
+        </span>
       </div>
     </div>
   );

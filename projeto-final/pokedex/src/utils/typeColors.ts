@@ -2,7 +2,7 @@ export const typeColors: Record<string, string> = {
   grass: "#57C101cc",
   fire: "#E65000cc",
   water: "#3C77FFcc",
-  poison: "#8D3A3Ccc",
+  poison: "#8D03A3cc",
   bug: "#ADA131cc",
   normal: "#868C6Ccc",
   electric: "#F0C000cc",

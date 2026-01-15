@@ -1,6 +1,8 @@
 import type { Pokemon } from "../types/pokemon";
 import { typeColors } from "../utils/typeColors";
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react"; // <--- 1. Import do Ícone
+import { useFavorites } from "../hooks/useFavorite"; // <--- 2. Import do Hook
 
 interface PokemonCardProps {
   pokemon: Pokemon;
@@ -10,33 +12,43 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
   const mainType = pokemon.types[0].type.name;
   const color = typeColors[mainType] ?? "#666666";
 
+  // --- 3. Lógica do Favorito ---
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorite = isFavorite(pokemon.id);
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // Impede de abrir a página de detalhes
+    e.stopPropagation(); // Impede o clique de "subir"
+    toggleFavorite(pokemon.id);
+  };
+
   return (
     <Link to={`/pokemon/${pokemon.id}`} className="w-full flex justify-center">
       <div
         style={{ borderColor: color, backgroundColor: "#FFFFFF" }}
         className="
-    /* --- MOBILE (FIGMA) --- */
-    w-[204px]
-    h-[271px]
-    rounded-[24px]
-    border-[4px]
+          /* --- MOBILE (FIGMA) --- */
+          w-[204px]
+          h-[271px]
+          rounded-[24px]
+          border-[4px]
 
-    /* --- DESKTOP (FIGMA) --- */
-    lg:w-[425px]
-    lg:h-[500px]
-    lg:rounded-[32px]
-    lg:border-[4px]
+          /* --- DESKTOP (FIGMA) --- */
+          lg:w-[425px]
+          lg:h-[500px]
+          lg:rounded-[32px]
+          lg:border-[4px]
 
-    /* --- COMUNS --- */
-    relative
-    overflow-hidden
-    cursor-pointer
-    transition-all duration-300
-    hover:scale-105
-    hover:shadow-xl
-  "
+          /* --- COMUNS --- */
+          relative
+          overflow-hidden
+          cursor-pointer
+          transition-all duration-300
+          hover:scale-105
+          hover:shadow-xl
+        "
       >
-        {/* AURA/GLOW (Ajustada para o novo tamanho menor) */}
+        {/* AURA/GLOW */}
         <div
           style={{ backgroundColor: color }}
           className="
@@ -109,41 +121,61 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
         {/* NOME (Rodapé) */}
         <div
           className="
-    absolute left-0 bottom-0
-    flex items-center justify-center
-    z-20
+            absolute left-0 bottom-0
+            
+            /* 1. MUDANÇA AQUI: Layout em Coluna (flex-col) */
+            flex flex-col items-center justify-center
+            gap-2 /* Espaço entre o nome e o coração */
+            z-30  /* Aumentei o Z-index para garantir o clique */
 
-    /* MOBILE (FIGMA) */
-    w-full
-    h-[84px]
-    px-[16px]
-    rounded-b-[20px]
+            /* MOBILE */
+            w-full
+            h-[84px]
+            px-[16px]
+            rounded-b-[20px]
 
-    /* DESKTOP (FIGMA) */
-    lg:w-[425px]
-    lg:h-[112px]
-    lg:px-[32px]
-    lg:rounded-b-[32px]
-  "
+            /* DESKTOP */
+            lg:w-[425px]
+            lg:h-[112px]
+            lg:px-[32px]
+            lg:rounded-b-[32px]
+          "
         >
           <span
             className="
-      font-['Inter']
-      font-bold
-      capitalize
-      text-[#5D5D5D]
-      text-center
-      leading-[120%]
+            font-['Inter']
+            font-bold
+            capitalize
+            text-[#5D5D5D]
+            text-center
+            leading-[120%]
 
-      /* MOBILE */
-      text-[20px]
+            /* MOBILE */
+            text-[20px]
 
-      /* DESKTOP */
-      lg:text-[28px]
-    "
+            /* DESKTOP */
+            lg:text-[28px]
+          "
           >
             {pokemon.name}
           </span>
+          {/* BOTÃO DE FAV */}
+          <button
+            onClick={handleFavoriteClick}
+            className="
+              /* Removemos o 'absolute' */
+              transition-transform active:scale-90 hover:scale-110
+              focus:outline-none
+              flex items-center justify-center
+            "
+          >
+            <Heart
+              className="w-5 h-5 lg:w-7 lg:h-7 transition-colors duration-300"
+              fill={favorite ? "#FF4040" : "transparent"}
+              color={favorite ? "#FF4040" : "#CDCDCD"}
+              strokeWidth={2.5}
+            />
+          </button>
         </div>
       </div>
     </Link>

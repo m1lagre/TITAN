@@ -1,19 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getPokemons } from "../services/pokeApi";
 import type { Pokemon } from "../types/pokemon";
 import { Header } from "../components/Header";
 import { PokemonList } from "../components/PokemonList";
+import { useFavorites } from "../hooks/useFavorite";
 
-const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee993] to-[#d6e8fe]";
+const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee892] to-[#d6e9ff]";
 
 export function Home() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
+  // ESTADO DO SCROLL: Começa com 12
+  const [visibleCount, setVisibleCount] = useState(12);
+  const sensorRef = useRef<HTMLDivElement>(null);
+
+  const { favorites } = useFavorites();
+
   useEffect(() => {
     async function loadData() {
       try {
+        // Aqui ele busca os 151 (que você configurou no service), isso tá certo!
         const data = await getPokemons();
         setPokemons(data);
       } catch (error) {
@@ -25,13 +33,41 @@ export function Home() {
     loadData();
   }, []);
 
+  // Reseta para 12 se pesquisar algo novo
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [search]);
+
   const filteredPokemons = pokemons.filter((pokemon) => {
-    const searchLower = search.toLowerCase();
+    const searchLower = search.toLowerCase().trim();
+    if (searchLower === "fav") {
+      return favorites.includes(pokemon.id);
+    }
     return (
       pokemon.name.toLowerCase().includes(searchLower) ||
       pokemon.id.toString().includes(searchLower)
     );
   });
+
+  // OBSERVER (SENSOR)
+  useEffect(() => {
+    if (loading) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          console.log("Carregando mais...");
+          setVisibleCount((prev) => prev + 12);
+        }
+      },
+      { rootMargin: "100px" }
+    );
+    if (sensorRef.current) observer.observe(sensorRef.current);
+    return () => observer.disconnect();
+  }, [loading, filteredPokemons, visibleCount]);
+
+  // --- O SEGREDO ESTÁ AQUI ---
+  // Criamos uma lista nova que só tem os itens do 0 até o visibleCount (12)
+  const visiblePokemons = filteredPokemons.slice(0, visibleCount);
 
   if (loading)
     return (
@@ -45,53 +81,38 @@ export function Home() {
     );
 
   return (
-    // 1. FUNDO GERAL (A cor de fundo ocupa a tela toda)
     <div
       className={`min-h-screen w-full flex justify-center ${BACKGROUND_COLOR}`}
     >
-      {/* 2. DIV PAI (O Layout que você me passou) */}
-      <div
-        className="
-          flex flex-col items-center
-          relative
-
-          /* --- MOBILE  --- */
-          w-full max-w-[423px]  
-          min-h-[871px]        
-          mt-[64px]           
-          px-[16px]       
-          gap-[40px]         
-
-          /* --- DESKTOP  --- */
-          lg:max-w-[1920px] 
-          lg:min-h-[2487px] 
-          lg:mt-0 
-          lg:px-0 
-          lg:gap-0
-          
-        "
-      >
-        {/* Cabeçalho */}
+      <div className="flex flex-col items-center relative w-full max-w-[423px] min-h-[871px] mt-[40px] px-[16px] gap-[40px] lg:max-w-[1920px] lg:min-h-[2487px] lg:mt-0 lg:px-0 lg:gap-0">
         <Header search={search} setSearch={setSearch} />
 
-        {/* Main Content (Lista de Pokemons) */}
-        <main
-          className="
-            flex flex-col items-center w-full 
-            
-            /* MOBILE:
-               Removemos 'mt' e 'pb' aqui, pois o GAP do pai (40px) 
-               já empurra a lista para baixo do header.
-            */
-            pb-8 
+        <main className="flex flex-col items-center w-full pb-8 lg:mt-16 lg:pb-16">
+          {search === "fav" && filteredPokemons.length === 0 && (
+            <div className="text-center text-slate-600 font-bold mt-10 text-xl">
+              Você ainda não tem favoritos. <br /> Clique no ❤️ das cartas!
+            </div>
+          )}
 
-            /* DESKTOP:
-               Mantemos as margens originais do desktop.
-            */
-            lg:mt-16 lg:pb-16
-          "
-        >
-          <PokemonList pokemons={filteredPokemons} />
+          {/* CASO 2: BUSCA NORMAL SEM RESULTADOS (Novo) */}
+          {search !== "fav" && filteredPokemons.length === 0 && !loading && (
+            <div className="text-center text-slate-500 font-bold mt-10 text-xl">
+              Nenhum Pokémon encontrado.
+            </div>
+          )}
+
+          {/* AQUI A CORREÇÃO: Usamos visiblePokemons em vez de filteredPokemons */}
+          <PokemonList pokemons={visiblePokemons} />
+
+          {/* SENSOR DO FIM DA PÁGINA */}
+          {visibleCount < filteredPokemons.length && (
+            <div
+              ref={sensorRef}
+              className="w-full h-20 mt-8 flex justify-center items-center"
+            >
+              <div className="w-6 h-6 border-4 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
         </main>
       </div>
     </div>

@@ -13,6 +13,7 @@ export function PokemonDetails() {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState<PokemonDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
+  const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee892] to-[#d6e9ff]";
 
   useEffect(() => {
     async function loadPokemon() {
@@ -45,7 +46,9 @@ export function PokemonDetails() {
   const color = typeColors[mainType] || "#4BBA93";
 
   return (
-    <div className="min-h-screen w-full bg-[#fee993] flex justify-center overflow-x-hidden">
+    <div
+      className={`min-h-screen w-full flex justify-center overflow-x-hidden ${BACKGROUND_COLOR}`}
+    >
       {/* CONTAINER MESTRE */}
       <div
         className="
@@ -54,7 +57,9 @@ export function PokemonDetails() {
 
         /* MOBILE (Figma) */
         w-full max-w-[423px]
-        mt-[128px] gap-[24px] px-[16px]
+        px-[16px]
+        mt-[64px] gap-[16px]
+        mb-[24px]
 
         /* DESKTOP (Figma) */
         lg:max-w-[1198px]
@@ -64,41 +69,95 @@ export function PokemonDetails() {
         {/* BOTÃO VOLTAR */}
         <Link
           to="/"
-          className="
-            bg-white border-2 border-[#2B2B2B] rounded-full flex items-center justify-center shadow-sm hover:scale-105 transition-transform
+          className={`
+            /* COMUM */
             
+            
+            border-2 border-[#5D5D5D]
+            rounded-[999999px]
+            flex items-center justify-center
+            gap-[16px]
+            p-[16px]
+            ${BACKGROUND_COLOR}
+
+            transition-transform hover:scale-105
+
             /* MOBILE */
-            w-[50px] h-[50px] p-0
+            w-[222px] h-[48px] left-[16px] top-[64px]
+
+            /* DESKTOP */
+            lg:w-[301px] lg:h-[64px] lg:p-[16px]
+          `}
+        >
+          <ChevronLeft
+            className="text-[#2B2B2B] w-6 h-6 lg:w-8 lg:h-8"
+            strokeWidth={2.5}
+          />
+          <div
+            className="
+          /* COMUM */
+          pr-[8px]
+          gap-[10px]
+          flex items-center
+              
+          /* MOBILE */
+          w-[150px] h-[19px]  
+
+          /* DESKTOP */
+          lg:w-[221px] lg:h-[29px] 
+          "
+          >
+            <span
+              className="
+            /* COMUM */
+            color-[#452C91]
+            font-['Inter'] font-medium
+            tracking-[0%] align-bottom
+            
+
+
+            /* MOBILE */
+            inline-block w-[142px] h-[19px]
+            text-[16px] leading-[120%] 
             
             /* DESKTOP */
-            lg:w-[301px] lg:h-[64px] lg:gap-[16px] lg:p-[16px]
-          "
-        >
-          <ChevronLeft className="text-[#2B2B2B]" size={24} strokeWidth={2.5} />
-          {/* Texto só aparece no Desktop */}
-          <span className="hidden lg:block font-bold text-xl text-[#2B2B2B]">
-            Voltar para a galeria
-          </span>
+            lg:w-[213px] lg:h-[29px]
+            lg:text-[24px]
+            
+            "
+            >
+              Voltar para galeria
+            </span>
+          </div>
         </Link>
 
         {/* CARD DOS DETALHES (Container com Borda Gradiente) */}
         <div
+          style={{
+            backgroundImage: `
+      linear-gradient(
+        to top,
+        ${color},
+        ${color} 60%,
+        ${color}
+      )
+    `,
+          }}
           className="
-            rounded-[32px] 
-            shadow-[0px_4px_100px_0px_#00000052] 
-            flex-shrink-0
-            bg-gradient-to-t from-[rgba(169,210,135,0.8)] to-[#2BA379]
+    rounded-[32px]
+    shadow-[0px_4px_100px_0px_#00000052]
+    flex-shrink-0
 
-            /* MOBILE */
-            w-full
-            min-h-[991px]    /* height: 991px */
-            p-[6px]          /* border-width: 6px */
-            
-            /* DESKTOP */
-            lg:w-[1198px] 
-            lg:h-[1687px] 
-            lg:p-[12px]      /* border-width desktop */
-          "
+    /* MOBILE */
+    w-full
+    min-h-[991px]
+    p-[6px]
+
+    /* DESKTOP */
+    lg:w-[1198px]
+    lg:h-[1687px]
+    lg:p-[12px]
+  "
         >
           {/* MIOLO BRANCO */}
           <div className="w-full h-full relative overflow-hidden flex flex-col bg-[#FFFEF7] rounded-[24px]">

@@ -9,29 +9,52 @@ interface PokemonHeaderProps {
 export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
   return (
     <div
-      style={{ backgroundColor: color }}
+      style={{
+        backgroundImage: `
+     radial-gradient(
+      circle at 50% 50%,
+      ${color} 0%,
+      rgba(255,255,255,0.65) 100%,
+      rgba(255,255,255,0.85) 40%
+    )
+  `,
+      }}
       className="
-          relative flex-shrink-0 backdrop-blur-md
-          /* MOBILE */
-          w-full h-[236px]
-          /* DESKTOP */
-          lg:w-[1190px] lg:h-[528px]
-        "
+      relative shrink-0 overflow-hidden
+      rounded-b-[40px]
+      backdrop-blur-[160px]
+      w-full h-[236px]
+      lg:w-[1190px] lg:h-[528px]
+"
     >
-      {/* Linha 1: ID e Tipos */}
       <div
         className="
         w-full flex justify-between items-start box-border
         /* MOBILE */
-        h-[60px] pt-[24px] px-[24px]
+        pt-[24px] px-[24px]
         /* DESKTOP */
-        lg:h-[108px] lg:pt-[48px] lg:px-[48px]
-      "
+        lg:pt-[48px] lg:px-[48px]
+  "
       >
-        <span className="font-bold text-white/60 text-xl lg:text-3xl">
-          #{String(pokemon.id).padStart(3, "0")}
-        </span>
+        {/* ESQUERDA: ID + NOME (mesma div) */}
+        <div className="flex flex-col gap-[4px]">
+          <span className="font-bold text-[#5D5D5D] text-xl lg:text-3xl">
+            #{String(pokemon.id).padStart(3, "0")}
+          </span>
 
+          <div className="lg:hidden w-[142px] h-[54px]">
+            <h1 className="font-['Inter'] font-bold capitalize truncate text-[#373737] text-[19px] leading-[130%]">
+              {pokemon.name}
+            </h1>
+          </div>
+
+          {/* se no desktop o nome é maior */}
+          <h1 className="hidden lg:block font-bold capitalize truncate text-[#373737] text-[56px] leading-[130%]">
+            {pokemon.name}
+          </h1>
+        </div>
+
+        {/* DIREITA: TIPOS (sozinho) */}
         <div className="flex gap-2">
           {pokemon.types.map((t) => (
             <span
@@ -41,36 +64,17 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
                 color: "#FFFFFF",
               }}
               className="
-                flex items-center justify-center rounded-full capitalize font-bold shadow-sm
-                /* MOBILE */
-                h-[24px] px-[12px] text-xs
-                /* DESKTOP */
-                lg:h-[34px] lg:px-[16px] lg:text-sm
-              "
+          flex items-center justify-center rounded-full capitalize font-bold shadow-sm
+          /* MOBILE */
+          h-[24px] px-[12px] text-xs
+          /* DESKTOP */
+          lg:h-[34px] lg:px-[16px] lg:text-sm
+        "
             >
               {t.type.name}
             </span>
           ))}
         </div>
-      </div>
-
-      {/* Linha 2: Nome */}
-      <div
-        className="
-        w-full flex items-center box-border
-        /* MOBILE */
-        h-[40px] px-[24px] mt-[4px] gap-[8px]
-        /* DESKTOP */
-        lg:h-[58px] lg:pl-[48px] lg:mt-[8px] lg:gap-[10px]
-      "
-      >
-        <h1
-          className="font-bold capitalize truncate text-[#5D5D5D]"
-          style={{ lineHeight: "100%" }}
-        >
-          {/* Tamanho da fonte responsivo via Tailwind classes arbitrárias ou style inline condicional */}
-          <span className="text-[32px] lg:text-[56px]">{pokemon.name}</span>
-        </h1>
       </div>
 
       {/* Imagem */}
@@ -81,8 +85,11 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
           absolute z-10 drop-shadow-2xl object-contain
           
           /* MOBILE: Centralizada e menor */
-          w-[180px] h-[180px]
-          bottom-[-20px] left-1/2 -translate-x-1/2
+          w-[208px]
+          h-[208px]
+          top-[30px]
+          left-[107px]
+          bottom-[-20px] 
           
           /* DESKTOP: Gigante e na direita */
           lg:w-[475px] lg:h-[388px] 
