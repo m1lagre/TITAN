@@ -34,12 +34,19 @@ Este projeto é uma **Pokédex completa**, desenvolvida em **React com TypeScrip
 O projeto está organizado em camadas bem definidas:
 
 src/
+
 ├─ pages/ → Páginas principais (Home e Details)
+
 ├─ components/ → Componentes reutilizáveis
+
 ├─ hooks/ → Hooks customizados
+
 ├─ services/ → Comunicação com API
+
 ├─ utils/ → Funções auxiliares
+
 ├─ types/ → Tipagens TypeScript
+
 
 ### Home (`/`)
 - Busca todos os Pokémons da API
