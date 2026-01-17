@@ -12,15 +12,15 @@ export interface PokemonType {
   };
 }
 
-// Aqui definimos o Pokemon completo
+// Pokemon completo
 export interface Pokemon {
   id: number;
   name: string;
-  types: PokemonType[]; // É uma lista (array) de tipos
+  types: PokemonType[]; 
   sprites: {
     other: {
       "official-artwork": {
-        front_default: string; // A URL da imagem bonita
+        front_default: string; 
       };
     };
   };
@@ -41,7 +41,7 @@ export interface PokemonDetails {
       name: string;
     };
   }[];
-  stats: PokemonStat[]; // Novo: Lista de status (força, defesa...)
+  stats: PokemonStat[]; 
   sprites: {
     other: {
       "official-artwork": {

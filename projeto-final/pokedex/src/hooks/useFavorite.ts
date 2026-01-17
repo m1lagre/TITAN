@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-// Nome do evento que vamos disparar quando alguém favoritar
 const FAVORITES_UPDATED = "favorites-updated";
 
 export function useFavorites() {
@@ -10,16 +9,15 @@ export function useFavorites() {
   });
 
   useEffect(() => {
-    // Função que recarrega os dados do LocalStorage
+
     function updateState() {
       const saved = localStorage.getItem("pokedex_favorites");
       setFavorites(saved ? JSON.parse(saved) : []);
     }
 
-    // O hook fica ouvindo: "Alguém gritou que os favoritos mudaram?"
+
     window.addEventListener(FAVORITES_UPDATED, updateState);
 
-    // Opcional: ouve mudanças feitas em outras abas do navegador
     window.addEventListener("storage", updateState);
 
     return () => {
@@ -29,7 +27,7 @@ export function useFavorites() {
   }, []);
 
   function toggleFavorite(id: number) {
-    // 1. Ler o que já está salvo direto do "banco" (localStorage)
+    // Ler o que já está salvo direto localStorage
     const saved = localStorage.getItem("pokedex_favorites");
     const currentList = saved ? JSON.parse(saved) : [];
 
@@ -42,11 +40,10 @@ export function useFavorites() {
       newList = [...currentList, id];
     }
 
-    // 2. Salva a nova lista
+    //  Salva a nova lista
     localStorage.setItem("pokedex_favorites", JSON.stringify(newList));
 
-    // 3. AVISA TODO MUNDO! (Dispara o evento)
-    // Isso faz a Home ouvir e se atualizar instantaneamente
+
     window.dispatchEvent(new Event(FAVORITES_UPDATED));
   }
 

@@ -4,7 +4,7 @@ import { getPokemonById } from "../services/pokeApi";
 import type { PokemonDetails as PokemonDetailsType } from "../types/pokemon";
 import { ChevronLeft } from "lucide-react";
 import { typeColors } from "../utils/typeColors";
-
+import { Loader } from "../components/Loader";
 import { PokemonHeader } from "../components/DetailsHeader";
 import { PokemonInfo } from "../components/DetailsInfo";
 import { PokemonStats } from "../components/DetailsStats";
@@ -31,14 +31,14 @@ export function PokemonDetails() {
     loadPokemon();
   }, [id]);
 
-  if (loading)
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fee993]">
-        <div className="text-2xl font-bold text-slate-600 animate-pulse">
-          Carregando...
-        </div>
-      </div>
-    );
+if (loading) {
+  return (
+    <Loader
+      message="Carregando Pokédex..."
+      backgroundClassName={BACKGROUND_COLOR}
+    />
+  );
+}
 
   if (!pokemon) return <div>Não encontrado</div>;
 

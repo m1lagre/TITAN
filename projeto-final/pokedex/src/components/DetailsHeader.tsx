@@ -21,7 +21,7 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
       }}
       className="
       relative shrink-0 overflow-hidden
-      rounded-b-[40px]
+      
       backdrop-blur-[160px]
       w-full h-[236px]
       lg:w-[1190px] lg:h-[528px]
@@ -48,13 +48,13 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
             </h1>
           </div>
 
-          {/* se no desktop o nome é maior */}
+          {/* desktop o nome é maior */}
           <h1 className="hidden lg:block font-bold capitalize truncate text-[#373737] text-[56px] leading-[130%]">
             {pokemon.name}
           </h1>
         </div>
 
-        {/* DIREITA: TIPOS (sozinho) */}
+        {/* TIPOS */}
         <div className="flex gap-2">
           {pokemon.types.map((t) => (
             <span
@@ -64,12 +64,12 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
                 color: "#FFFFFF",
               }}
               className="
-          flex items-center justify-center rounded-full capitalize font-bold shadow-sm
-          /* MOBILE */
-          h-[24px] px-[12px] text-xs
-          /* DESKTOP */
-          lg:h-[34px] lg:px-[16px] lg:text-sm
-        "
+                flex items-center justify-center rounded-full capitalize font-bold shadow-sm
+                /* MOBILE */
+                h-[24px] px-[12px] text-xs
+                /* DESKTOP */
+                lg:h-[34px] lg:px-[16px] lg:text-sm
+              "
             >
               {t.type.name}
             </span>
@@ -84,17 +84,20 @@ export function PokemonHeader({ pokemon, color }: PokemonHeaderProps) {
         className="
           absolute z-10 drop-shadow-2xl object-contain
           
-          /* MOBILE: Centralizada e menor */
+          /* MOBILE */
           w-[208px]
           h-[208px]
           top-[30px]
-          left-[107px]
           bottom-[-20px] 
+
+          left-1/2           /* Manda pro meio da tela */
+          -translate-x-1/2   
           
-          /* DESKTOP: Gigante e na direita */
+          /* DESKTOP */
           lg:w-[475px] lg:h-[388px] 
           lg:top-[108px] lg:left-[357px] 
-          lg:bottom-auto lg:translate-x-0
+          lg:bottom-auto 
+          lg:translate-x-0   
         "
       />
     </div>

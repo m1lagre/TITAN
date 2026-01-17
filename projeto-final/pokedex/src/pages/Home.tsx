@@ -4,6 +4,7 @@ import type { Pokemon } from "../types/pokemon";
 import { Header } from "../components/Header";
 import { PokemonList } from "../components/PokemonList";
 import { useFavorites } from "../hooks/useFavorite";
+import { Loader } from "../components/Loader";
 
 const BACKGROUND_COLOR = "bg-gradient-to-r from-[#fee892] to-[#d6e9ff]";
 
@@ -21,7 +22,6 @@ export function Home() {
   useEffect(() => {
     async function loadData() {
       try {
-        // Aqui ele busca os 151 (que você configurou no service), isso tá certo!
         const data = await getPokemons();
         setPokemons(data);
       } catch (error) {
@@ -49,7 +49,7 @@ export function Home() {
     );
   });
 
-  // OBSERVER (SENSOR)
+  // SENSOR
   useEffect(() => {
     if (loading) return;
     const observer = new IntersectionObserver(
@@ -65,21 +65,17 @@ export function Home() {
     return () => observer.disconnect();
   }, [loading, filteredPokemons, visibleCount]);
 
-  // --- O SEGREDO ESTÁ AQUI ---
-  // Criamos uma lista nova que só tem os itens do 0 até o visibleCount (12)
+  // lista nova que só tem os itens do 0 até o visibleCount (12)
   const visiblePokemons = filteredPokemons.slice(0, visibleCount);
 
-  if (loading)
-    return (
-      <div
-        className={`min-h-screen flex items-center justify-center ${BACKGROUND_COLOR}`}
-      >
-        <div className="text-2xl font-bold text-slate-600 animate-pulse">
-          Carregando Pokédex...
-        </div>
-      </div>
-    );
-
+if (loading) {
+  return (
+    <Loader
+      message="Carregando Pokédex..."
+      backgroundClassName={BACKGROUND_COLOR}
+    />
+  );
+}
   return (
     <div
       className={`min-h-screen w-full flex justify-center ${BACKGROUND_COLOR}`}
@@ -94,17 +90,14 @@ export function Home() {
             </div>
           )}
 
-          {/* CASO 2: BUSCA NORMAL SEM RESULTADOS (Novo) */}
           {search !== "fav" && filteredPokemons.length === 0 && !loading && (
             <div className="text-center text-slate-500 font-bold mt-10 text-xl">
               Nenhum Pokémon encontrado.
             </div>
           )}
 
-          {/* AQUI A CORREÇÃO: Usamos visiblePokemons em vez de filteredPokemons */}
           <PokemonList pokemons={visiblePokemons} />
 
-          {/* SENSOR DO FIM DA PÁGINA */}
           {visibleCount < filteredPokemons.length && (
             <div
               ref={sensorRef}

@@ -45,21 +45,21 @@ export function PokemonInfo({ pokemon }: PokemonInfoProps) {
             "
           >
             {/* Altura */}
-            <div className="flex justify-between items-center bg-[#F6F8FC] rounded-[16px] flex-1 p-[16px] h-[60px] lg:w-[570px] lg:h-[79px] lg:p-[24px] lg:flex-none">
-              <span className="text-sm lg:text-xl font-bold text-['#5D5D5D']">
+            <div className="flex justify-between items-center bg-[#E8E8E8] rounded-[16px] flex-1 p-[16px] h-[60px] lg:w-[570px] lg:h-[79px] lg:p-[24px] lg:flex-none">
+              <span className="text-sm lg:text-xl font-bold text-[#5D5D5D]">
                 Altura
               </span>
-              <span className="text-sm lg:text-xl font-bold text-['#373737']">
+              <span className="text-sm lg:text-xl font-bold text-[#373737]">
                 {pokemon.height / 10} m
               </span>
             </div>
 
             {/* Peso */}
-            <div className="flex justify-between items-center bg-[#F6F8FC] rounded-[16px] flex-1 p-[16px] h-[60px] lg:w-[570px] lg:h-[79px] lg:p-[24px] lg:flex-none">
-              <span className="text-sm lg:text-xl font-bold text-['#F6F8FC']">
+            <div className="flex justify-between items-center bg-[#E8E8E8] rounded-[16px] flex-1 p-[16px] h-[60px] lg:w-[570px] lg:h-[79px] lg:p-[24px] lg:flex-none">
+              <span className="text-sm lg:text-xl font-bold text-[#5D5D5D]">
                 Peso
               </span>
-              <span className="text-sm lg:text-xl font-bold text-['#373737']">
+              <span className="text-sm lg:text-xl font-bold text-[#373737]">
                 {pokemon.weight / 10} kg
               </span>
             </div>

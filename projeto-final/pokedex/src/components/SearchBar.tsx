@@ -49,7 +49,6 @@ export function SearchBar({ search, setSearch }: SearchBarProps) {
           font-['Inter'] 
           font-medium 
           
-          /* Tamanho da fonte ajustado levemente para caber na altura 59px */
           text-[16px] lg:text-[20px]
         "
       />

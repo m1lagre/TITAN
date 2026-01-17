@@ -6,7 +6,7 @@ interface PokemonStatsProps {
 
 const statNames: Record<string, string> = {
   hp: "HP",
-  attack: "Ataque", // Abreviei para mobile
+  attack: "Ataque", 
   defense: "Defesa",
   "special-attack": "Ataque Especial",
   "special-defense": "Defesa Especial",
@@ -66,9 +66,9 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
                 </span>
               </div>
 
-              {/* Barra Cinza (Fundo) */}
+              
               <div className="w-full h-[12px] lg:h-[20px] bg-[#E2E8F0] rounded-full overflow-hidden">
-                {/* Barra Colorida (Valor) */}
+                
                 <div
                   className={`h-full ${barColor}`}
                   style={{ width: `${Math.min(stat.base_stat, 100)}%` }}

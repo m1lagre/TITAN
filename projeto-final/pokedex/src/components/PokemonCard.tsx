@@ -1,9 +1,8 @@
 import type { Pokemon } from "../types/pokemon";
 import { typeColors } from "../utils/typeColors";
 import { Link } from "react-router-dom";
-import { Heart } from "lucide-react"; // <--- 1. Import do Ícone
-import { useFavorites } from "../hooks/useFavorite"; // <--- 2. Import do Hook
-
+import { Heart } from "lucide-react";
+import { useFavorites } from "../hooks/useFavorite";
 interface PokemonCardProps {
   pokemon: Pokemon;
 }
@@ -12,13 +11,13 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
   const mainType = pokemon.types[0].type.name;
   const color = typeColors[mainType] ?? "#666666";
 
-  // --- 3. Lógica do Favorito ---
+  // Favorito
   const { isFavorite, toggleFavorite } = useFavorites();
   const favorite = isFavorite(pokemon.id);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault(); // Impede de abrir a página de detalhes
-    e.stopPropagation(); // Impede o clique de "subir"
+    e.stopPropagation();
     toggleFavorite(pokemon.id);
   };
 
@@ -27,28 +26,31 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
       <div
         style={{ borderColor: color, backgroundColor: "#FFFFFF" }}
         className="
-          /* --- MOBILE (FIGMA) --- */
-          w-[204px]
-          h-[271px]
-          rounded-[24px]
-          border-[4px]
-
-          /* --- DESKTOP (FIGMA) --- */
-          lg:w-[425px]
-          lg:h-[500px]
-          lg:rounded-[32px]
-          lg:border-[4px]
-
-          /* --- COMUNS --- */
+        
+         /*  COMUNS */
           relative
           overflow-hidden
           cursor-pointer
           transition-all duration-300
           hover:scale-105
           hover:shadow-xl
+
+          /* MOBILE  */
+          w-[204px]
+          h-[271px]
+          rounded-[24px]
+          border-[4px]
+
+          /*  DESKTOP  */
+          lg:w-[425px]
+          lg:h-[500px]
+          lg:rounded-[32px]
+          lg:border-[4px]
+
+
         "
       >
-        {/* AURA/GLOW */}
+        {/* AURA */}
         <div
           style={{ backgroundColor: color }}
           className="
@@ -87,9 +89,9 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
                 }}
                 className="
                   flex items-center justify-center rounded-full capitalize font-bold shadow-sm
-                  /* Mobile: Pequeno */
+                  /* Mobile*/
                   h-[20px] px-[8px] text-[9px]
-                  /* Desktop: Grande */
+                  /* Desktop*/
                   lg:h-[34px] lg:px-[16px] lg:text-sm
                 "
               >
@@ -123,10 +125,9 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
           className="
             absolute left-0 bottom-0
             
-            /* 1. MUDANÇA AQUI: Layout em Coluna (flex-col) */
             flex flex-col items-center justify-center
-            gap-2 /* Espaço entre o nome e o coração */
-            z-30  /* Aumentei o Z-index para garantir o clique */
+            gap-2 
+            z-30  
 
             /* MOBILE */
             w-full
@@ -159,6 +160,7 @@ export function PokemonCard({ pokemon }: PokemonCardProps) {
           >
             {pokemon.name}
           </span>
+
           {/* BOTÃO DE FAV */}
           <button
             onClick={handleFavoriteClick}
