@@ -27,6 +27,12 @@ app.get('/',(req,res) => {
 
 })
 
+app.use(function(req,res,next){
+
+    res.status(404).sendFile(`${basePath}/404.html`)
+
+})
+
 app.listen(port,()=>{
     
     
