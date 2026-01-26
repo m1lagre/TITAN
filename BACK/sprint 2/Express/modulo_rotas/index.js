@@ -13,12 +13,13 @@ app.use(express.urlencoded({
 
 app.use(express.json())
 
+// arquivos estáticos
+app.use(express.static('public'))
+
 
 const basePath = path.join(__dirname, 'templates')
 
 app.use('/users', users)
-
-app.use('/')
 
 app.get('/',(req,res) => {
 
