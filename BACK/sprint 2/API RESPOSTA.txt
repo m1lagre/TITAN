@@ -1,0 +1,5 @@
+1) O que seria uma API Rest e Restful?
+
+2) Faça uma comparação sobre os diferentes tipos de API’s e cite a vantagem e desvantagem de cada um.
+
+3) Escreva um texto explicativo sobre os verbos HTTP mais comuns (GET, POST, PUT, DELETE) e suas aplicações.
