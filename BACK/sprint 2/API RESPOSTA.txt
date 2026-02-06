@@ -1,5 +1,18 @@
 1) O que seria uma API Rest e Restful?
 
+(REGRA) API Rest é um estilo de Arquietura de software que define um conjunto de critérios e normas para a criação de serviços web.
+
+(IMPLEMENTAÇÃO) Já uma API Restful é o mesmo q a API Rest, pórem essa cumpre com todos os regras e critérios de organização impostas pelo estilo REST.
+
 2) Faça uma comparação sobre os diferentes tipos de API’s e cite a vantagem e desvantagem de cada um.
 
+SOAP VS REST : SOAP -> Protocolo muito seguro pórem muito antigo, pesado e dificil de implementar comparado ao Rest
+               REST -> Protocolo que usa padronização dos verbos HTTP , mais leve, escalável e fácil de implementar no mercado atual.
+
 3) Escreva um texto explicativo sobre os verbos HTTP mais comuns (GET, POST, PUT, DELETE) e suas aplicações.
+
+Esses verbos HTTP são utilizados para definirmos qual ação iremos realizar sobre os dados na API. as requisições necessarias para a API através da conexão HTTP,
+o verbo GET nos permite solicitar a representação de um dado especifico, usano para realizar leitura sem fazer alterar nada no servidor. 
+O verbo POST nos permite adicionar informações no banco de dados do servidor para criar um novo recurso.
+O verbo PUT utilizamos para substituir/atualizar dados existentes.
+o DELETE nos permite deletar/excluir dados no banco do servidor. 
