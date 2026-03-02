@@ -18,9 +18,34 @@ class Calculator {
     // Recebe o sinal da operação
     setOperator(operator: string): void {
         this.operator= operator
+        this.previousInput = this.currentInput 
+        this.currentInput = ""
     }
 
     calculate(): void {
-    
+
+        if (this.operator === "+") {
+            const result = parseFloat(this.previousInput) + parseFloat(this.currentInput);
+            this.currentInput = result.toString();
+        }
+        else if(this.operator === "-"){
+            const result = parseFloat(this.previousInput) - parseFloat(this.currentInput);
+            this.currentInput = result.toString();
+        }
+        else if(this.operator === "*"){
+            const result = parseFloat(this.previousInput) * parseFloat(this.currentInput);
+            this.currentInput = result.toString();
+        }
+        else if(this.operator === "/"){
+            const result = parseFloat(this.previousInput) / parseFloat(this.currentInput);
+            this.currentInput = result.toString();
+        }
     }
 }
+
+const minhaCalculadora = new Calculator();
+minhaCalculadora.appendNumber("10");
+minhaCalculadora.setOperator("*");
+minhaCalculadora.appendNumber("5")
+minhaCalculadora.calculate()
+console.log(minhaCalculadora.currentInput)
